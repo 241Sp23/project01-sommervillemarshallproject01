@@ -1,9 +1,22 @@
 package project01;
 
+import java.util.*;
+import java.io.*;
+import javax.swing.*;
+
 public class Project01 {
 
     public static void main(String[] args) {
-        System.out.println("gagw");
+        Scanner input = new Scanner(System.in);
+        System.out.println("What would you like to do.\nMenu (Choose one of the following or Q to quit):");
+        System.out.println("F -Filter on Type");
+        System.out.println("D -Filter on Date");
+        System.out.println("S -Filter on Show");
+        System.out.print("H -Highest Days in Top Ten\nChoice: ");
+        String choice = input.nextLine();
+        System.out.print("\nWhat week would you like to search for (mm/dd/yyyy): ");
+        String week = input.nextLine();
+        while ();
     }
 
 }
