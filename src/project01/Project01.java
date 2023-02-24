@@ -5,7 +5,7 @@ import java.io.*;
 import javax.swing.*;
 
 public class Project01 {
-
+    
     public static void main(String[] args) throws FileNotFoundException {
         //Setup to allow the user to choose the file
         JFileChooser myChooser = new JFileChooser();
@@ -67,5 +67,5 @@ public class Project01 {
 
         }
     }
-
+    
 }
