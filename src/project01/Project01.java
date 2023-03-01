@@ -68,6 +68,8 @@ public class Project01 {
             choice = input.nextLine();
             choice = choice.toLowerCase();
         }
+        
+        inputFind.close();
     }
 
     
@@ -87,7 +89,7 @@ public class Project01 {
     
     public static void searchForShow(String[][] dataSet, String show)throws FileNotFoundException{
         //create an output file
-        PrintWriter outputFile= new PrintWriter("search.txt");
+        PrintWriter outputFile= new PrintWriter("searchResults.txt");
         outputFile.print("Results for: " + show + "\n");
         
         boolean found = false;
@@ -115,7 +117,9 @@ public class Project01 {
         
         if(found == false){
                 System.out.println("Show not found.");
-            }
+        }
+        
+        outputFile.close();
     }
     
     
@@ -144,21 +148,37 @@ public class Project01 {
                 outputFile.print("\n");
             }    
         }
+        
+        outputFile.close();
     }
     
     
     public static void filterOnDate(String[][] dataSet, String type) throws FileNotFoundException{
        //create an output file
         PrintWriter outputFile= new PrintWriter("date.txt");
+        outputFile.print("Results for: " + type + "\n");
         
        //for loop to iterate through the array
-        for(String[] r: dataSet){
-            for(String c: r){
-                if (c.equals(type)){
-                    outputFile.println(type);
+        for(int r = 0; r < dataSet.length; r++){
+            if((dataSet[r][0].toLowerCase()).equals(type)){
+               for(int c = 0; c < dataSet[r].length; c++){
+                   //selection structure to hard code the spacing in the file
+                   if(c == 0 || c == 1){
+                       outputFile.print(dataSet[r][c] +  "       ");
+                   }
+                   else if(c == 2){
+                       outputFile.printf("%30.30s", dataSet[r][c]);
+                       outputFile.print("        ");
+                   }
+                   else if(c == 3 || c == 4 || c == 5){
+                       outputFile.printf("%-15s", dataSet[r][c]);
+                   }      
                 }
-            }
-        } 
+                outputFile.print("\n");
+            }    
+        }
+        
+        outputFile.close();
     }
     
     
