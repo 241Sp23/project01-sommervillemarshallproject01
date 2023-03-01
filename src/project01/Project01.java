@@ -12,6 +12,9 @@ public class Project01 {
         myChooser.showOpenDialog(null);
         File fileInput = myChooser.getSelectedFile();
         Scanner inputFind = new Scanner(fileInput);
+        
+        //Creates a 2D array
+        String dataSet[][] = find(inputFind);
 
         //Priming read
         Scanner input = new Scanner(System.in);
@@ -21,32 +24,38 @@ public class Project01 {
         System.out.println("S -Filter on Show");
         System.out.print("H -Highest Days in Top Ten\nChoice: ");
         String choice = input.nextLine();
+        choice = choice.toLowerCase();
 
-        while (choice != "q") {
+        while (!"q".equals(choice)) {
             //Switch to call methods from the user input
             switch (choice) {
                 case "f":
                     System.out.print("Would you like to filter on TV Show, Movie, or Stand-Up Comedy: ");
                     String filter = input.nextLine();
-                    //call method here
+                    filter = filter.toLowerCase();
+                    //filterOnType(dataSet, filter);
                     break;
 
                 case "d":
                     System.out.print("What week would you like to search for (mm/dd/yyyy): ");
                     String date = input.nextLine();
-                    //call method here
+                    date = date.toLowerCase();
+                    //filterOnDate(dataSet, date);
                     break;
 
                 case "s":
                     System.out.print("What TV Show or Movie would you like to search for: ");
                     String show = input.nextLine();
-                    //call method here
+                    show = show.toLowerCase();
+                    //searchForShow(dataSet, show);
                     break;
 
                 case "h":
                     System.out.print("The show/movie with the highest number of consecutive days in the top ten is: ");
-                    //call method
+                    //highestDaysInTopTen(dataSet);
                     break;
+                default:
+                    System.out.println("Invalid Output");
             }
 
             //Gather more user input
@@ -57,15 +66,22 @@ public class Project01 {
             System.out.println("S -Filter on Show");
             System.out.print("H -Highest Days in Top Ten\nChoice: ");
             choice = input.nextLine();
+            choice = choice.toLowerCase();
         }
     }
 
-    public static String[][] find(Scanner fileInput) {
+    
+    public static String[][] find (Scanner fileInput) {
+        //creates a 2D array
+        String[][] dataSet = new String[7101][6];
 
-        while (fileInput.hasNext()) {
-            String Date = fileInput.nextLine();
-
-        }
+        //for loop to iterate through the 2D array
+        for(int row = 0; row < dataSet.length; row++){
+            String[] contents = fileInput.nextLine().strip().split(","); //splits the line at the commas
+            System.arraycopy(contents, 0, dataSet[row], 0, 6); //puts the split line in the 2D array
+        } 
+       
+        return dataSet;
     }
     
 }
