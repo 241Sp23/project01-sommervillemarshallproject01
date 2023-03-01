@@ -51,8 +51,7 @@ public class Project01 {
                     break;
 
                 case "h":
-                    System.out.print("The show/movie with the highest number of consecutive days in the top ten is: ");
-                    //highestDaysInTopTen(dataSet);
+                    highestDaysInTopTen(dataSet);
                     break;
                 default:
                     System.out.println("Invalid Output");
@@ -88,7 +87,7 @@ public class Project01 {
 
     public static void searchForShow(String[][] dataSet, String show) throws FileNotFoundException {
         //create an output file
-        PrintWriter outputFile = new PrintWriter("search.txt");
+        PrintWriter outputFile = new PrintWriter("searchResults.txt");
         outputFile.print("Results for: " + show + "\n");
 
         boolean found = false;
@@ -154,6 +153,7 @@ public class Project01 {
         for (int r = 0; r < dataSet.length; r++) {
             if ((dataSet[r][0].toLowerCase()).equals(type)) {
                 for (int c = 0; c < dataSet[r].length; c++) {
+                        
                     //selection structure to hard code the spacing in the file
                     if (c == 0 || c == 1) {
                         outputFile.print(dataSet[r][c] + "       ");
@@ -171,13 +171,25 @@ public class Project01 {
         outputFile.close();
     }
 
-    /*public static void highestDaysInTopTen(String[][] dataSet){
-       for(String[] r: dataSet){
-            for(String c: r){
-                if (c.equals(type)){
-                    outputFile.println(type);
-                }
-            }
+    public static void highestDaysInTopTen(String[][] dataSet){
+       int count = 0;
+       int max = 0;
+       String show = dataSet[0][0];
+       
+       for (int r = 1; r < dataSet.length; r++) {
+           int num = Integer.parseInt(dataSet[r][5]);
+           if (num > max){
+               if(count == 0){
+                   max = num;
+                   count++;
+               }
+               if(num > max){
+                   max = num;
+                   show = dataSet[r][2];
+               }
+           }
         }
-    }*/
+       System.out.println("The show/movie with the highest number of consecutive days in the top ten is: " + show + " with " + max + " days!");
+    }
+    
 }
