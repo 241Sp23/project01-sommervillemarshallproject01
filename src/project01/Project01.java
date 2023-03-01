@@ -33,21 +33,21 @@ public class Project01 {
                     System.out.print("Would you like to filter on TV Show, Movie, or Stand-Up Comedy: ");
                     String filter = input.nextLine();
                     filter = filter.toLowerCase();
-                    //filterOnType(dataSet, filter);
+                    filterOnType(dataSet, filter);
                     break;
 
                 case "d":
                     System.out.print("What week would you like to search for (mm/dd/yyyy): ");
                     String date = input.nextLine();
                     date = date.toLowerCase();
-                    //filterOnDate(dataSet, date);
+                    filterOnDate(dataSet, date);
                     break;
 
                 case "s":
                     System.out.print("What TV Show or Movie would you like to search for: ");
                     String show = input.nextLine();
                     show = show.toLowerCase();
-                    //searchForShow(dataSet, show);
+                    searchForShow(dataSet, show);
                     break;
 
                 case "h":
@@ -84,4 +84,93 @@ public class Project01 {
         return dataSet;
     }
     
+    
+    public static void searchForShow(String[][] dataSet, String show)throws FileNotFoundException{
+        //create an output file
+        PrintWriter outputFile= new PrintWriter("search.txt");
+        outputFile.print("Results for: " + show + "\n");
+        
+        boolean found = false;
+        
+       //for loop to iterate through the array
+        for(int r = 0; r < dataSet.length; r++){
+            if((dataSet[r][2].toLowerCase()).equals(show)){
+               found = true;
+               for(int c = 0; c < dataSet[r].length; c++){
+                   //selection structure to hard code the spacing in the file
+                   if(c == 0 || c == 1){
+                       outputFile.print(dataSet[r][c] +  "       ");
+                   }
+                   else if(c == 2){
+                       outputFile.printf("%30.30s", dataSet[r][c]);
+                       outputFile.print("        ");
+                   }
+                   else if(c == 3 || c == 4 || c == 5){
+                       outputFile.printf("%-15s", dataSet[r][c]);
+                   }      
+                }
+                outputFile.print("\n");
+            } 
+        }
+        
+        if(found == false){
+                System.out.println("Show not found.");
+            }
+    }
+    
+    
+    
+    public static void filterOnType(String[][] dataSet, String type)throws FileNotFoundException{
+        //create an output file
+        PrintWriter outputFile= new PrintWriter("type.txt");
+        outputFile.print("Results for: " + type + "\n");
+        
+       //for loop to iterate through the array
+        for(int r = 0; r < dataSet.length; r++){
+            if((dataSet[r][3].toLowerCase()).equals(type)){
+               for(int c = 0; c < dataSet[r].length; c++){
+                   //selection structure to hard code the spacing in the file
+                   if(c == 0 || c == 1){
+                       outputFile.print(dataSet[r][c] +  "       ");
+                   }
+                   else if(c == 2){
+                       outputFile.printf("%30.30s", dataSet[r][c]);
+                       outputFile.print("        ");
+                   }
+                   else if(c == 3 || c == 4 || c == 5){
+                       outputFile.printf("%-15s", dataSet[r][c]);
+                   }      
+                }
+                outputFile.print("\n");
+            }    
+        }
+    }
+    
+    
+    public static void filterOnDate(String[][] dataSet, String type) throws FileNotFoundException{
+       //create an output file
+        PrintWriter outputFile= new PrintWriter("date.txt");
+        
+       //for loop to iterate through the array
+        for(String[] r: dataSet){
+            for(String c: r){
+                if (c.equals(type)){
+                    outputFile.println(type);
+                }
+            }
+        } 
+    }
+    
+    
+    /*
+    public static void highestDaysInTopTen(String[][] dataSet){
+       for(String[] r: dataSet){
+            for(String c: r){
+                if (c.equals(type)){
+                    outputFile.println(type);
+                }
+            }
+        }  
+    } 
+    */
 }
